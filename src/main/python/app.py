@@ -18,8 +18,8 @@ env = os.environ.get('ENV')
 def main():
     env = os.environ.get('ENVIRON')
     src_dir=os.environ.get('SRC_DIR')
-    read_send_message(src_dir)
-    kafka_consumer(env, 'kafka_consumer_retail_db')
+#    read_send_message(src_dir)
+#    kafka_consumer(env, 'kafka_consumer_retail_db')
 
     spark = get_spark_session(env, appName)
     read_data_from_json = reading_from_kafka(spark)
