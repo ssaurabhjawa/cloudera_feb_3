@@ -22,12 +22,14 @@ def main():
 #    kafka_consumer(env, 'kafka_consumer_retail_db')
 
     spark = get_spark_session(env, appName)
-    read_data_from_json = reading_from_kafka(spark)
+    reading_from_kafka(spark)
+    #read_data_from_json = reading_from_kafka(spark)
 
+"""
     for table in read_data_from_json.select('table_name').distinct().toLocalIterator():
         retail_table = transforming_data_from_df(read_data_from_json, f'{table.table_name}')
         print(retail_table)
-
+"""
 
 if __name__ == '__main__':
     main()
