@@ -6,15 +6,10 @@ from util import get_config
 
 
 def kafka_consumer(env, appName):
-    configs = get_config()
-    conf = {configs.keys(): configs.values(),
-            'group.id': "retail",
-            'enable.auto.commit': False,
-            'auto.offset.reset': 'earliest'}
-
+    conf = {'bootstrap.servers': 'w01.itversity.com:9092,w02.itversity.com:9092'}
     c = Consumer(conf)
 
-    c.subscribe(['retail_topic_1'])
+    c.subscribe(['retail_db'])
     while True:
         msg = c.poll(1.0)
 
