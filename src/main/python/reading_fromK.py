@@ -1,3 +1,9 @@
+from pyspark.sql import functions as F
+import os
+from pyspark.sql.types import StructField, StructType, StringType
+from pyspark.sql.functions import *
+
+
 def reading_from_kafka(spark):
     kafka_bootstrap_servers = 'w01.itversity.com:9092,w02.itversity.com:9092'
 
