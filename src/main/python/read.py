@@ -19,8 +19,6 @@ def read_send_message(src_dir):
     conf = {'bootstrap.servers': 'w01.itversity.com:9092,w02.itversity.com:9092'}
     p = Producer(conf)
     for entry in os.listdir(src_dir):
-        # Trigger any available delivery report callbacks from previous produce() calls
-        p.poll(0)
         file_dir = os.path.join(src_dir, entry)
         for filesInDir in os.listdir(file_dir):
             table_folder = os.path.join(file_dir, filesInDir)
@@ -29,7 +27,7 @@ def read_send_message(src_dir):
                 # Asynchronously produce a message, the delivery report callback
                 # will be triggered from poll() above, or flush() below, when the message has
                 # been successfully delivered or failed permanently.
-                p.produce('retail_db', key="key", value=line, callback=delivery_report)
+                p.produce('retail_db', key="key", value=line)
                 time.sleep(1)
 
             # Wait for any outstanding messages to be delivered and delivery report

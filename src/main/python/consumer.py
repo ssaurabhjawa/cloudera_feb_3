@@ -23,4 +23,3 @@ def kafka_consumer(env, appName):
 
         print('Received message: {}'.format(msg.value().decode('utf-8')))
     c.close()
-
