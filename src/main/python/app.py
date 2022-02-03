@@ -3,7 +3,7 @@ from util import get_spark_session
 from read import read_send_message
 from consumer import kafka_consumer
 
-from read import reading_from_kafka
+from reading_fromK import reading_from_kafka
 from transform import transforming_data_from_df
 from pyspark.sql.functions import *
 from pyspark.sql.types import StructField, StructType, StringType
