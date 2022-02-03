@@ -27,10 +27,11 @@ def reading_from_kafka(spark):
     write_df = df_value. \
         withColumn("value", from_json("value", schema)). \
         writeStream. \
-        format("memory"). \
-        queryName("retail_poc_4"). \
+        format("console"). \
         start()
+        #queryName("retail_poc_5"). \
+    print(f'printing....{write_df}')
 
-    df_qn = spark.sql('SELECT value FROM retail_poc_4')
-    df_table = df_qn.select(col('value')['table_name'].alias('table_name'), col('value')['record'].alias('record'))
-    return df_table
+    #df_qn = spark.sql('SELECT value FROM retail_poc_5')
+    #df_table = df_qn.select(col('value')['table_name'].alias('table_name'), col('value')['record'].alias('record'))
+    #return df_table
