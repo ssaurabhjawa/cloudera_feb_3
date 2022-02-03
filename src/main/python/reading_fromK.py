@@ -28,9 +28,9 @@ def reading_from_kafka(spark):
         withColumn("value", from_json("value", schema)). \
         writeStream. \
         format("memory"). \
-        queryName("retail_poc_3"). \
+        queryName("retail_poc_4"). \
         start()
 
-    df_qn = spark.sql('SELECT value FROM retail_poc_3')
+    df_qn = spark.sql('SELECT value FROM retail_poc_4')
     df_table = df_qn.select(col('value')['table_name'].alias('table_name'), col('value')['record'].alias('record'))
     return df_table
