@@ -25,8 +25,8 @@ def main():
     read_data_from_json = reading_from_kafka(spark)
 
     for table in read_data_from_json.select('table_name').distinct().toLocalIterator():
-        datasets = transforming_data_from_df(read_data_from_json, f'{table.table_name}')
-        print(datasets)
+        retail_table = transforming_data_from_df(read_data_from_json, f'{table.table_name}')
+        print(retail_table)
 
 
 if __name__ == '__main__':
