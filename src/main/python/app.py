@@ -2,12 +2,12 @@ import os
 from util import get_spark_session
 from read import read_send_message
 from consumer import kafka_consumer
-"""
+
 from read import reading_from_kafka
 from transform import transforming_data_from_df
 from pyspark.sql.functions import *
 from pyspark.sql.types import StructField, StructType, StringType
-"""
+
 
 
 appName = os.environ.get('NAME')
@@ -20,7 +20,7 @@ def main():
     src_dir=os.environ.get('SRC_DIR')
     read_send_message(src_dir)
     kafka_consumer(env, 'kafka_consumer_retail_db')
-"""
+
     spark = get_spark_session(env, appName)
     read_data_from_json = reading_from_kafka(spark)
 
@@ -28,6 +28,6 @@ def main():
         datasets = transforming_data_from_df(read_data_from_json, f'{table.table_name}')
         print(datasets)
 
-"""
+
 if __name__ == '__main__':
     main()
