@@ -28,8 +28,8 @@ def reading_from_kafka(spark):
         withColumn("value", from_json("value", schema)). \
         writeStream. \
         format('csv'). \
-        option("checkpointLocation", f'/home/{username}/kafka/retail_logs/gen_logs/checkpoint'). \
-        option('path', f'/home/{username}/kafka/retail_logs/gen_logs/data'). \
+        option("checkpointLocation", f'/user/{username}/kafka/retail_logs/gen_logs/checkpoint'). \
+        option('path', f'/user/{username}/kafka/retail_logs/gen_logs/data'). \
         start()
     print(f'printing....{write_df}')
 #        queryName("retail_poc_5"). \
