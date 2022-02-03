@@ -31,6 +31,8 @@ def reading_from_kafka(spark):
         option("checkpointLocation", f'/user/{username}/kafka/retail_logs/gen_logs/checkpoint'). \
         option('path', f'/user/{username}/kafka/retail_logs/gen_logs/data'). \
         start()
+    df_te = spark.read.csv(f'/user/itv000925/kafka/retail_logs/gen_logs/data')
+    df_te.printSchema()
     print(f'printing....{write_df}')
 #        queryName("retail_poc_5"). \
 
