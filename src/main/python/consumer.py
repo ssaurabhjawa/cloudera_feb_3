@@ -6,7 +6,8 @@ import getpass
 
 def kafka_consumer(env, appName):
     conf = {'bootstrap.servers': 'w01.itversity.com:9092,w02.itversity.com:9092',
-            'group.id': "foo"
+            'group.id': "foo",
+            'auto.offset.reset': 'smallest'
             }
     c = Consumer(conf)
 
