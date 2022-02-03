@@ -2,7 +2,6 @@ from confluent_kafka import Consumer
 from util import get_spark_session
 from pyspark.sql.functions import date_format, to_date, split, substring
 import getpass
-from util import get_config
 
 
 def kafka_consumer(env, appName):
