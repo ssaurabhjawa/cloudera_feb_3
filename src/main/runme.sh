@@ -5,4 +5,4 @@ export PATH=$SPARK_HOME/bin:$SPARK_HOME/python:$PATH
 export PYSPARK_PYTHON=python3
 export ENVIRON=PROD
 export SRC_DIR='/home/itv000925/retail_db_data/'
-/home/itv000925/cloudera_feb_3/src/main/python/app.py
+python3 app.py
