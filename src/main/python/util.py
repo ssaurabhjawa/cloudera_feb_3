@@ -26,3 +26,4 @@ def get_spark_session(env, appName):
             getOrCreate()
         return spark
     return
+

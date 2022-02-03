@@ -2,6 +2,8 @@ from pyspark.sql import functions as F
 import os
 from confluent_kafka import Producer
 import time
+from pyspark.sql.types import StructField, StructType, StringType
+from pyspark.sql.functions import *
 
 
 def delivery_report(err, msg):
@@ -34,7 +36,35 @@ def read_send_message(src_dir):
             # callbacks to be triggered.
             p.flush()
 
-def reading_json_file(spark, folder_path):
-    read_json_data = spark.read.json(folder_path)
-    json_read_df = read_json_data.select('*', F.input_file_name().alias('file_path'))
-    return json_read_df
+def reading_from_kafka(spark):
+    kafka_bootstrap_servers = 'w01.itversity.com:9092,w02.itversity.com:9092'
+
+    #read data from Kafka Topic
+    df = spark. \
+      readStream. \
+      format('kafka'). \
+      option('kafka.bootstrap.servers', kafka_bootstrap_servers). \
+      option('subscribe', 'retail_db'). \
+      option("startingOffsets","earliest"). \
+      load()
+    schema = StructType(
+            [
+                    StructField("table_name", StringType()),
+                    StructField("record", StringType())
+            ]
+    )
+
+    #Extracting dataFrame with columns, table name and record
+    df_value = df.select(col('value').cast('string'))
+    write_df = df_value. \
+        withColumn("value", from_json("value", schema)). \
+        writeStream. \
+        format("memory"). \
+        queryName("retail_poc_1"). \
+        start()
+
+    df_qn = spark.sql('SELECT value FROM retail_poc_1')
+    df_table = df_qn.select(col('value')['table_name'].alias('table_name'), col('value')['record'].alias('record'))
+    return df_table
+
+
