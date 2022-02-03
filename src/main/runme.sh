@@ -5,5 +5,8 @@ export PATH=$SPARK_HOME/bin:$SPARK_HOME/python:$PATH
 export PYSPARK_PYTHON=python3
 export ENVIRON=PROD
 export SRC_DIR='/home/itv000925/retail_db_data/'
-python ./python/app.py
-
+spark-submit \
+--deploy-mode client
+--master yarn \
+--conf spark.ui.port=0 \
+./python/app.py
