@@ -5,7 +5,9 @@ import getpass
 
 
 def kafka_consumer(env, appName):
-    conf = {'bootstrap.servers': 'w01.itversity.com:9092,w02.itversity.com:9092'}
+    conf = {'bootstrap.servers': 'w01.itversity.com:9092,w02.itversity.com:9092',
+            'group.id': "foo"
+            }
     c = Consumer(conf)
 
     c.subscribe(['retail_db'])
